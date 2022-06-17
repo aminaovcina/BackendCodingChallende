@@ -1,0 +1,45 @@
+I, [2022-06-17T10:27:52.934557 #27420]  INFO -- : Cleared interactions for example ""
+I, [2022-06-17T10:27:53.064211 #27420]  INFO -- : Registered expected interaction PUT /api/quizzes/123/questions/1
+D, [2022-06-17T10:27:53.065209 #27420] DEBUG -- : {
+  "description": "A PUT request to update a quiz question with id = 1",
+  "providerState": "There are some quizzes",
+  "request": {
+    "method": "put",
+    "path": "/api/quizzes/123/questions/1",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    }
+  },
+  "metadata": null
+}
+I, [2022-06-17T10:27:53.080169 #27420]  INFO -- : Received request PUT /api/quizzes/123/questions/1
+D, [2022-06-17T10:27:53.081166 #27420] DEBUG -- : {
+  "path": "/api/quizzes/123/questions/1",
+  "query": "",
+  "method": "put",
+  "body": {
+    "Text": "Updated text"
+  },
+  "headers": {
+    "Content-Length": "23",
+    "Content-Type": "application/json",
+    "Host": "localhost:9222",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-06-17T10:27:53.083160 #27420]  INFO -- : Found matching response for PUT /api/quizzes/123/questions/1
+D, [2022-06-17T10:27:53.083160 #27420] DEBUG -- : {
+  "status": 204,
+  "headers": {
+    "Content-Type": "application/json; charset=utf-8"
+  }
+}
+I, [2022-06-17T10:27:53.111085 #27420]  INFO -- : Verifying - interactions matched for example ""
+I, [2022-06-17T10:27:53.147989 #27420]  INFO -- : Writing pact for QuizService to ../pacts/quizclient-quizservice.json
+I, [2022-06-17T10:27:53.167933 #27420]  INFO -- : Cleared interactions for example ""
