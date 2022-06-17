@@ -12,6 +12,9 @@ namespace QuizService.Controllers;
 [Route("api/quizzes")]
 public class QuizController : Controller
 {
+    //TO DO: Refactor Every Method On Clean Arhitecture
+    //TO DO: Implement Try-Catch Blocks with Global Exception Handling
+    //TO DO: Implement Global Logger Handler
     private readonly IDbConnection _connection;
     public readonly IQuizService _quizService;
 
@@ -63,6 +66,7 @@ public class QuizController : Controller
         int rowsUpdated = _connection.Execute(sql, new {Id = id, Title = value.Title});
         if (rowsUpdated == 0)
             return NotFound();
+        //TO DO: Return Updated Data.
         return NoContent();
     }
 
@@ -99,6 +103,7 @@ public class QuizController : Controller
         int rowsUpdated = _connection.Execute(sql, new {QuestionId = qid, Text = value.Text, CorrectAnswerId = value.CorrectAnswerId});
         if (rowsUpdated == 0)
             return NotFound();
+        //TO DO: Return Updated Data.
         return NoContent();
     }
 
@@ -130,6 +135,7 @@ public class QuizController : Controller
         int rowsUpdated = _connection.Execute(sql, new {AnswerId = qid, Text = value.Text});
         if (rowsUpdated == 0)
             return NotFound();
+        //TO DO: Return Changed Data
         return NoContent();
     }
 

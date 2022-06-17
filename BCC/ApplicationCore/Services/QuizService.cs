@@ -26,7 +26,7 @@ namespace ApplicationCore.Services
            
             var quiz = _quizRepository.Get(id);
             if (quiz == null)
-                return null; //throw new exception
+                return null; 
             var questions = _questionRepository.GetByQuizId(id);
             var answers = _answerRepository.GetByQuizId(id).GroupBy(x => x.QuestionId).ToDictionary(k => k.Key, v => v.Select(answer => new QuizResponseModel.AnswerItem
             { 
