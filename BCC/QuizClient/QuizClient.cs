@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using QuizClient.Model;
 using QuizClient.Tests;
 
 namespace QuizClient;
@@ -95,6 +96,20 @@ public class QuizClient
         return response.StatusCode == HttpStatusCode.NoContent ?
             new Response<object>(response.StatusCode, null) :
             new Response<object>(response.StatusCode, null, await ReadErrorAsync(response));
+    }
+
+    public async Task<Response<int>> GetQuizScoreAsync(QuizAnswers quizAnswer, int quizId)
+    {
+        var request =
+           new HttpRequestMessage(HttpMethod.Get, new Uri(_quizServiceUri, $"/api/quizzes/{quizId}/score"))
+           {
+               Content = new StringContent(JsonConvert.SerializeObject(quizAnswer))
+           };
+        request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+        var response = await _httpClient.SendAsync(request);
+        return response.StatusCode == HttpStatusCode.OK ?
+            new Response<int>(response.StatusCode, await ReadAndDeserializeAsync<int>(response)) :
+            new Response<int>(response.StatusCode, -1, await ReadErrorAsync(response));
     }
 
     public async Task<Response<Uri>> PostQuizResponseAsync(QuestionResponse questionResponse, int quizId)

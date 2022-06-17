@@ -21,7 +21,7 @@ namespace ApplicationCore.Services
             _answerRepository = answerRepository;
             _quizRepository = quizRepository;
         }
-        public dynamic Get(int id)
+        public QuizResponseModel Get(int id)
         {
            
             var quiz = _quizRepository.Get(id);
@@ -50,6 +50,22 @@ namespace ApplicationCore.Services
                 {"questions", $"/api/quizzes/{id}/questions"}
             }
             };
+        }
+        public int GetScore(int id, QuizAnswersModel value)
+        {
+            var quiz = Get(id);
+            int score = 0;
+            if (quiz == null)
+                return -1;
+
+            foreach (var question in quiz.Questions)
+            {
+                //const string sql = "SELECT CASE WHEN EXISTS ( SELECT * FROM Question WHERE Id = @QuestionId AND QuizId = @QuizId AND CorrectAnswerId = @AnswerId)";
+                //if (_connection.Query<Quiz>(sql).Count() == 1) score++; ;
+                if (value.Answers.Where(x => x.QuestionId == question.Id && x.AnswerId == question.CorrectAnswerId).Any())
+                    score++;
+            }
+            return score;
         }
 
     }

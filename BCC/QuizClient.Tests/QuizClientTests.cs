@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
+using QuizClient.Model;
 using Xunit;
 
 namespace QuizClient.Tests;
@@ -23,7 +24,57 @@ public class QuizClientTests : IClassFixture<QuizServiceApiPact>
         _mockProviderService.ClearInteractions();
         _mockProviderServiceBaseUri = data.MockProviderServiceBaseUri;
     }
+    [Fact]
+    public async Task GetQuizScoreBySentAnswers_ReturnsScore()
+    {
+        _mockProviderService
+            .Given("There are some answers")
+            .UponReceiving("A GET method that retrives score based on answers")
+            .With(new ProviderServiceRequest
+            {
+                Method = HttpVerb.Get,
+                Path = "/api/quizzes/1/score",
+                Headers = new Dictionary<string, object>
+                {
+                    { "Content-Type", "application/json" }
+                }
+            })
+            .WillRespondWith(new ProviderServiceResponse
+            {
+                Status = 200,
+                Headers = new Dictionary<string, object>
+                {
+                    { "Content-Type", "application/json; charset=utf-8" }
+                },
+                Body = 1
+            });
 
+        var consumer = new QuizClient(_mockProviderServiceBaseUri, Client);
+
+        QuizAnswers quizAnswers = new QuizAnswers
+        {
+            Answers = new AnswerItem[]
+            {
+                new AnswerItem
+                {
+                    QuestionId = 1,
+                    AnswerId = 1
+                },
+                new AnswerItem
+                {
+                    QuestionId = 2,
+                    AnswerId = 1
+                }
+            }
+        };
+
+        var result = await consumer.GetQuizScoreAsync(quizAnswers, 1);
+        Assert.True(string.IsNullOrEmpty(result.ErrorMessage), result.ErrorMessage);
+        Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+        Assert.Equal(1, result.Value);
+
+        _mockProviderService.VerifyInteractions();
+    }
     [Fact]
     public async Task GetQuizzes_WhenSomeQuizzesExists_ReturnsTheQuizzes()
     {

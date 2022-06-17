@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuizService.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace ApplicationCore.IServices
 {
     public interface IQuizService
     {
-        dynamic Get(int id);
+        QuizResponseModel Get(int id);
+        int GetScore(int id, QuizAnswersModel value);
     }
 }

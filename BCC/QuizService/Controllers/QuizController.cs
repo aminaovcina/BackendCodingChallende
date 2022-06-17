@@ -6,6 +6,8 @@ using System.Linq;
 using QuizService.Domain.Entities;
 using QuizService.Domain.Models;
 using ApplicationCore.IServices;
+using System;
+using Microsoft.Extensions.Logging;
 
 namespace QuizService.Controllers;
 
@@ -17,12 +19,15 @@ public class QuizController : Controller
     //TO DO: Implement Global Logger Handler
     private readonly IDbConnection _connection;
     public readonly IQuizService _quizService;
+    private readonly ILogger _logger;
 
     public QuizController(IDbConnection connection,
-        IQuizService quizService)
+        IQuizService quizService,
+        ILogger<QuizController> logger)
     {
         _connection = connection;
         _quizService = quizService;
+        _logger = logger;
     }
 
     // GET api/quizzes
@@ -43,10 +48,18 @@ public class QuizController : Controller
     [HttpGet("{id}")]
     public object Get(int id)
     {
-        var result = _quizService.Get(id);
-        if (result == null)
-            return NotFound();
-        return Ok(result);
+        try
+        {
+            var result = _quizService.Get(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+        catch(Exception ex)
+        {
+            _logger.LogError("QuizController - Get ERROR: " + ex.Message);
+            return BadRequest(ex.Message);
+        }
     }
 
     // POST api/quizzes
@@ -84,14 +97,15 @@ public class QuizController : Controller
     // POST api/quizzes/5/questions
     [HttpPost]
     [Route("{id}/questions")]
-    public IActionResult PostQuestion(int id, [FromBody]QuestionCreateModel value)
+    public IActionResult PostQuestion(int id, [FromBody] QuestionCreateModel value)
     {
         const string quizSql = "SELECT * FROM Quiz WHERE Id = @Id;";
         var quiz = _connection.QueryFirstOrDefault<Quiz>(quizSql, new { Id = id });
         if (quiz == null)
             return NotFound();
+
         const string sql = "INSERT INTO Question (Text, QuizId) VALUES(@Text, @QuizId); SELECT LAST_INSERT_ROWID();";
-        var questionId = _connection.ExecuteScalar(sql, new {Text = value.Text, QuizId = id});
+        var questionId = _connection.ExecuteScalar(sql, new { Text = value.Text, QuizId = id });
         return Created($"/api/quizzes/{id}/questions/{questionId}", null);
     }
 
@@ -147,5 +161,24 @@ public class QuizController : Controller
         const string sql = "DELETE FROM Answer WHERE Id = @AnswerId";
         _connection.ExecuteScalar(sql, new {AnswerId = aid});
         return NoContent();
+    }
+
+    [HttpGet]
+    [Route("{id}/score")]
+    public IActionResult GetQuizScore(int id, [FromBody] QuizAnswersModel value)
+    {
+        try
+        {
+            var result = _quizService.GetScore(id, value);
+            if (result == -1)
+                return NotFound();
+            return Ok(result);
+        }
+        catch(Exception ex)
+        {
+            _logger.LogError("QuizController - GetQuizScore ERROR: " + ex.Message);
+            return BadRequest(ex.Message);
+        }
+       
     }
 }

@@ -63,7 +63,6 @@ public class QuizzesControllerTest
     }
 
     [Fact]
-        
     public async Task AQuizDoesNotExists_WhenPostingAQuestion_ReturnsNotFound()
     {
         const string QuizApiEndPoint = "/api/quizzes/999/questions";
@@ -76,7 +75,7 @@ public class QuizzesControllerTest
             var question = new QuestionCreateModel("The answer to everything is what?");
             var content = new StringContent(JsonConvert.SerializeObject(question));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var response = await client.PostAsync(new Uri(testHost.BaseAddress, $"{QuizApiEndPoint}"),content);
+            var response = await client.PostAsync(new Uri(testHost.BaseAddress, $"{QuizApiEndPoint}"), content);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
     }
