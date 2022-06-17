@@ -1,4 +1,4 @@
-namespace QuizService.Model.Domain;
+namespace QuizService.Domain.Entities;
 
 public class Quiz
 {

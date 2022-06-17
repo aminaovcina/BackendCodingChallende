@@ -5,13 +5,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Migrations\001-CreateTables.sql" />
+    <None Remove="Migrations\002-InsertSeedData.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\001-CreateTables.sql" />
+    <EmbeddedResource Include="Migrations\002-InsertSeedData.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\*.sql" />
+    <ProjectReference Include="..\ApplicationCore\ApplicationCore.csproj" />
+    <ProjectReference Include="..\QuizService.Infrastructure\QuizService.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

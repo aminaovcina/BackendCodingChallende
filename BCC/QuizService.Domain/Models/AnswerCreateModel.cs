@@ -1,4 +1,4 @@
-namespace QuizService.Model;
+namespace QuizService.Domain.Models;
 
 public class AnswerCreateModel
 {

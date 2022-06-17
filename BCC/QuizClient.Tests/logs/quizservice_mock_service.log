@@ -1,6 +1,6 @@
-I, [2022-06-17T10:27:52.934557 #27420]  INFO -- : Cleared interactions for example ""
-I, [2022-06-17T10:27:53.064211 #27420]  INFO -- : Registered expected interaction PUT /api/quizzes/123/questions/1
-D, [2022-06-17T10:27:53.065209 #27420] DEBUG -- : {
+I, [2022-06-17T15:21:35.701508 #12800]  INFO -- : Cleared interactions for example ""
+I, [2022-06-17T15:21:35.772345 #12800]  INFO -- : Registered expected interaction PUT /api/quizzes/123/questions/1
+D, [2022-06-17T15:21:35.772345 #12800] DEBUG -- : {
   "description": "A PUT request to update a quiz question with id = 1",
   "providerState": "There are some quizzes",
   "request": {
@@ -18,8 +18,8 @@ D, [2022-06-17T10:27:53.065209 #27420] DEBUG -- : {
   },
   "metadata": null
 }
-I, [2022-06-17T10:27:53.080169 #27420]  INFO -- : Received request PUT /api/quizzes/123/questions/1
-D, [2022-06-17T10:27:53.081166 #27420] DEBUG -- : {
+I, [2022-06-17T15:21:35.789273 #12800]  INFO -- : Received request PUT /api/quizzes/123/questions/1
+D, [2022-06-17T15:21:35.790273 #12800] DEBUG -- : {
   "path": "/api/quizzes/123/questions/1",
   "query": "",
   "method": "put",
@@ -33,13 +33,386 @@ D, [2022-06-17T10:27:53.081166 #27420] DEBUG -- : {
     "Version": "HTTP/1.1"
   }
 }
-I, [2022-06-17T10:27:53.083160 #27420]  INFO -- : Found matching response for PUT /api/quizzes/123/questions/1
-D, [2022-06-17T10:27:53.083160 #27420] DEBUG -- : {
+I, [2022-06-17T15:21:35.790273 #12800]  INFO -- : Found matching response for PUT /api/quizzes/123/questions/1
+D, [2022-06-17T15:21:35.791269 #12800] DEBUG -- : {
   "status": 204,
   "headers": {
     "Content-Type": "application/json; charset=utf-8"
   }
 }
-I, [2022-06-17T10:27:53.111085 #27420]  INFO -- : Verifying - interactions matched for example ""
-I, [2022-06-17T10:27:53.147989 #27420]  INFO -- : Writing pact for QuizService to ../pacts/quizclient-quizservice.json
-I, [2022-06-17T10:27:53.167933 #27420]  INFO -- : Cleared interactions for example ""
+I, [2022-06-17T15:21:35.806262 #12800]  INFO -- : Verifying - interactions matched for example ""
+I, [2022-06-17T15:21:35.819195 #12800]  INFO -- : Cleared interactions for example ""
+I, [2022-06-17T15:21:35.831163 #12800]  INFO -- : Registered expected interaction GET /api/quizzes
+D, [2022-06-17T15:21:35.831163 #12800] DEBUG -- : {
+  "description": "A GET request to retrieve the quizzes",
+  "providerState": "There are some quizzes",
+  "request": {
+    "method": "get",
+    "path": "/api/quizzes",
+    "headers": {
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "body": [
+      {
+        "id": 123,
+        "title": "This is quiz 123"
+      },
+      {
+        "id": 124,
+        "title": "This is quiz 124"
+      }
+    ]
+  },
+  "metadata": null
+}
+I, [2022-06-17T15:21:35.836149 #12800]  INFO -- : Received request GET /api/quizzes
+D, [2022-06-17T15:21:35.836149 #12800] DEBUG -- : {
+  "path": "/api/quizzes",
+  "query": "",
+  "method": "get",
+  "headers": {
+    "Host": "localhost:9222",
+    "Accept": "application/json",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-06-17T15:21:35.837146 #12800]  INFO -- : Found matching response for GET /api/quizzes
+D, [2022-06-17T15:21:35.837146 #12800] DEBUG -- : {
+  "status": 200,
+  "headers": {
+    "Content-Type": "application/json; charset=utf-8"
+  },
+  "body": [
+    {
+      "id": 123,
+      "title": "This is quiz 123"
+    },
+    {
+      "id": 124,
+      "title": "This is quiz 124"
+    }
+  ]
+}
+I, [2022-06-17T15:21:35.855097 #12800]  INFO -- : Verifying - interactions matched for example ""
+I, [2022-06-17T15:21:35.867066 #12800]  INFO -- : Cleared interactions for example ""
+I, [2022-06-17T15:21:35.879034 #12800]  INFO -- : Registered expected interaction POST /api/quizzes
+D, [2022-06-17T15:21:35.880031 #12800] DEBUG -- : {
+  "description": "A POST request",
+  "providerState": "There are some quizzes",
+  "request": {
+    "method": "post",
+    "path": "/api/quizzes",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json",
+      "Location": {
+        "json_class": "Pact::Term",
+        "data": {
+          "generate": "/api/quizzes/1",
+          "matcher": {
+            "json_class": "Regexp",
+            "o": 0,
+            "s": "quizzes\\/[0-9]*"
+          }
+        }
+      }
+    },
+    "body": {
+      "title": "This is quiz 999"
+    }
+  },
+  "metadata": null
+}
+I, [2022-06-17T15:21:35.891999 #12800]  INFO -- : Received request POST /api/quizzes
+D, [2022-06-17T15:21:35.891999 #12800] DEBUG -- : {
+  "path": "/api/quizzes",
+  "query": "",
+  "method": "post",
+  "body": {
+    "Id": 0,
+    "Title": "This is quiz 999"
+  },
+  "headers": {
+    "Content-Length": "35",
+    "Content-Type": "application/json",
+    "Host": "localhost:9222",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-06-17T15:21:35.892996 #12800]  INFO -- : Found matching response for POST /api/quizzes
+D, [2022-06-17T15:21:35.892996 #12800] DEBUG -- : {
+  "status": 201,
+  "headers": {
+    "Content-Type": "application/json",
+    "Location": {
+      "json_class": "Pact::Term",
+      "data": {
+        "generate": "/api/quizzes/1",
+        "matcher": {
+          "json_class": "Regexp",
+          "o": 0,
+          "s": "quizzes\\/[0-9]*"
+        }
+      }
+    }
+  },
+  "body": {
+    "title": "This is quiz 999"
+  }
+}
+I, [2022-06-17T15:21:35.903002 #12800]  INFO -- : Verifying - interactions matched for example ""
+I, [2022-06-17T15:21:35.915934 #12800]  INFO -- : Cleared interactions for example ""
+I, [2022-06-17T15:21:35.927902 #12800]  INFO -- : Registered expected interaction POST /api/quizzes/123/questions
+D, [2022-06-17T15:21:35.927902 #12800] DEBUG -- : {
+  "description": "A POST request to quiz 123 questions collection",
+  "providerState": "There are some quizzes",
+  "request": {
+    "method": "post",
+    "path": "/api/quizzes/123/questions",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json",
+      "Location": {
+        "json_class": "Pact::Term",
+        "data": {
+          "generate": "/api/quizzes/123/questions/1",
+          "matcher": {
+            "json_class": "Regexp",
+            "o": 0,
+            "s": "quizzes\\/123\\/questions\\/[0-9]*"
+          }
+        }
+      }
+    }
+  },
+  "metadata": null
+}
+I, [2022-06-17T15:21:35.936881 #12800]  INFO -- : Received request POST /api/quizzes/123/questions
+D, [2022-06-17T15:21:35.937877 #12800] DEBUG -- : {
+  "path": "/api/quizzes/123/questions",
+  "query": "",
+  "method": "post",
+  "body": {
+    "Text": "This is a question"
+  },
+  "headers": {
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "localhost:9222",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-06-17T15:21:35.937877 #12800]  INFO -- : Found matching response for POST /api/quizzes/123/questions
+D, [2022-06-17T15:21:35.937877 #12800] DEBUG -- : {
+  "status": 201,
+  "headers": {
+    "Content-Type": "application/json",
+    "Location": {
+      "json_class": "Pact::Term",
+      "data": {
+        "generate": "/api/quizzes/123/questions/1",
+        "matcher": {
+          "json_class": "Regexp",
+          "o": 0,
+          "s": "quizzes\\/123\\/questions\\/[0-9]*"
+        }
+      }
+    }
+  }
+}
+I, [2022-06-17T15:21:35.940900 #12800]  INFO -- : Verifying - interactions matched for example ""
+I, [2022-06-17T15:21:35.953835 #12800]  INFO -- : Cleared interactions for example ""
+I, [2022-06-17T15:21:35.965801 #12800]  INFO -- : Registered expected interaction GET /api/quizzes/123
+D, [2022-06-17T15:21:35.966800 #12800] DEBUG -- : {
+  "description": "A GET request to retrieve the quiz",
+  "providerState": "There are some quizzes",
+  "request": {
+    "method": "get",
+    "path": "/api/quizzes/123",
+    "headers": {
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "body": {
+      "id": 123,
+      "title": "This is quiz 123"
+    }
+  },
+  "metadata": null
+}
+I, [2022-06-17T15:21:35.971786 #12800]  INFO -- : Received request GET /api/quizzes/123
+D, [2022-06-17T15:21:35.971786 #12800] DEBUG -- : {
+  "path": "/api/quizzes/123",
+  "query": "",
+  "method": "get",
+  "headers": {
+    "Host": "localhost:9222",
+    "Accept": "application/json",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-06-17T15:21:35.972784 #12800]  INFO -- : Found matching response for GET /api/quizzes/123
+D, [2022-06-17T15:21:35.972784 #12800] DEBUG -- : {
+  "status": 200,
+  "headers": {
+    "Content-Type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "id": 123,
+    "title": "This is quiz 123"
+  }
+}
+I, [2022-06-17T15:21:35.989737 #12800]  INFO -- : Verifying - interactions matched for example ""
+I, [2022-06-17T15:21:36.002702 #12800]  INFO -- : Cleared interactions for example ""
+I, [2022-06-17T15:21:36.014671 #12800]  INFO -- : Registered expected interaction POST /api/quizzes
+D, [2022-06-17T15:21:36.015667 #12800] DEBUG -- : {
+  "description": "A POST quiz request",
+  "providerState": "There are some quizzes",
+  "request": {
+    "method": "post",
+    "path": "/api/quizzes",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json",
+      "Location": {
+        "json_class": "Pact::Term",
+        "data": {
+          "generate": "/api/quizzes/1",
+          "matcher": {
+            "json_class": "Regexp",
+            "o": 0,
+            "s": "quizzes\\/[0-9]*"
+          }
+        }
+      }
+    }
+  },
+  "metadata": null
+}
+I, [2022-06-17T15:21:36.026639 #12800]  INFO -- : Received request POST /api/quizzes
+D, [2022-06-17T15:21:36.027637 #12800] DEBUG -- : {
+  "path": "/api/quizzes",
+  "query": "",
+  "method": "post",
+  "body": {
+    "Id": 0,
+    "Title": "This is quiz 999"
+  },
+  "headers": {
+    "Content-Length": "35",
+    "Content-Type": "application/json",
+    "Host": "localhost:9222",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-06-17T15:21:36.027637 #12800]  INFO -- : Found matching response for POST /api/quizzes
+D, [2022-06-17T15:21:36.027637 #12800] DEBUG -- : {
+  "status": 201,
+  "headers": {
+    "Content-Type": "application/json",
+    "Location": {
+      "json_class": "Pact::Term",
+      "data": {
+        "generate": "/api/quizzes/1",
+        "matcher": {
+          "json_class": "Regexp",
+          "o": 0,
+          "s": "quizzes\\/[0-9]*"
+        }
+      }
+    }
+  }
+}
+I, [2022-06-17T15:21:36.038606 #12800]  INFO -- : Verifying - interactions matched for example ""
+I, [2022-06-17T15:21:36.050575 #12800]  INFO -- : Cleared interactions for example ""
+I, [2022-06-17T15:21:36.062543 #12800]  INFO -- : Registered expected interaction POST /api/quizzes/123/responses
+D, [2022-06-17T15:21:36.063544 #12800] DEBUG -- : {
+  "description": "A POST request creates a quiz response",
+  "providerState": "There is a quiz with id '123'",
+  "request": {
+    "method": "post",
+    "path": "/api/quizzes/123/responses",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json",
+      "Location": {
+        "json_class": "Pact::Term",
+        "data": {
+          "generate": "/api/quizzes/123/responses/1",
+          "matcher": {
+            "json_class": "Regexp",
+            "o": 0,
+            "s": "responses\\/[0-9]*"
+          }
+        }
+      }
+    }
+  },
+  "metadata": null
+}
+I, [2022-06-17T15:21:36.071519 #12800]  INFO -- : Received request POST /api/quizzes/123/responses
+D, [2022-06-17T15:21:36.071519 #12800] DEBUG -- : {
+  "path": "/api/quizzes/123/responses",
+  "query": "",
+  "method": "post",
+  "body": {
+  },
+  "headers": {
+    "Content-Length": "2",
+    "Content-Type": "application/json",
+    "Host": "localhost:9222",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-06-17T15:21:36.071519 #12800]  INFO -- : Found matching response for POST /api/quizzes/123/responses
+D, [2022-06-17T15:21:36.071519 #12800] DEBUG -- : {
+  "status": 201,
+  "headers": {
+    "Content-Type": "application/json",
+    "Location": {
+      "json_class": "Pact::Term",
+      "data": {
+        "generate": "/api/quizzes/123/responses/1",
+        "matcher": {
+          "json_class": "Regexp",
+          "o": 0,
+          "s": "responses\\/[0-9]*"
+        }
+      }
+    }
+  }
+}
+I, [2022-06-17T15:21:36.075541 #12800]  INFO -- : Verifying - interactions matched for example ""
+I, [2022-06-17T15:21:36.087506 #12800]  INFO -- : Writing pact for QuizService to ../pacts/quizclient-quizservice.json
+I, [2022-06-17T15:21:36.117426 #12800]  INFO -- : Cleared interactions for example ""
